@@ -68,6 +68,4 @@ You can either add each domain separately, depending on the providers you use:
 * github.com
 ...
 
-Or you can allow all domains with:
-
-* \*
+Or you can allow all domains with `\*`
