@@ -50,7 +50,7 @@ OAuth.popup('facebook', function(err, result) {
 
 		phonegap local plugin add https://github.com/oauth-io/oauth-phonegap
 
-3. Replace the generated example _index.html_ with the one included in the example folder, and copy jquery. A valid key is provided, but you can do your own app on [OAuth.io](https://oauth.io/). Also, please check that your _config.xml_ file contains `<access origin="*" />` or accept oauth.io & graph.facebook.com.
+3. Replace the generated example _index.html_ with the one included in the example folder, and copy jquery. A valid key is provided, but you can do your own app on [OAuth.io](https://oauth.io/). Also, please check that your _config.xml_ file contains `<access origin="*" />` or accept oauth.io and the provider's domain (e.g. graph.facebook.com).
 
 4. Plug your phone & run it ! (or add --emulate)
 
@@ -59,7 +59,7 @@ OAuth.popup('facebook', function(err, result) {
 
 ### URL Whitelist
 
-The OAuth.io will try to access various URLs, and their domains must be whitelisted in your _config.xml_ under **access**.
+OAuth.io will try to access various URLs, and their domains must be whitelisted in your _config.xml_ under **access**.
 
 You can either add each domain separately, depending on the providers you use:
 
