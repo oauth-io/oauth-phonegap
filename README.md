@@ -69,3 +69,7 @@ You can either add each domain separately, depending on the providers you use:
 ...
 
 Or you can allow all domains with `*`
+
+### Troubleshoot
+
+Make sure you only include this plugin in your app, and not the web's JS file.
