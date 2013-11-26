@@ -23,7 +23,10 @@ You can install this plugin into your project with the phonegap command-line int
 
 ### Usage
 
-The usage is basically the same than the web [javascript API](https://oauth.io/docs/api), the only difference being there is only the popup mode, as mobiles don't distinct redirection/popup.
+The usage is basically the same than the web [javascript API](https://oauth.io/docs/api), but there are some light differences:
+
+ - There is only the popup mode, as mobiles don't distinct redirection/popup.
+ - jquery is not auto loaded by default, so you can include it only if you need its features.
 
 In your Javascript, add this line to initialize OAuth:
 
@@ -37,6 +40,20 @@ OAuth.popup('facebook', function(err, result) {
   //use result.access_token in your API request
 });
  ```
+
+If you include jquery, you can call an API with authorized requests (e.g. twitter):
+
+ ```javascript
+OAuth.popup("twitter", function(err, r) {
+  // the tokens are still available via r.oauth_token / r.oauth_token_secret
+  // You can use r.get / r.post / r.put / r.patch / r.del, with the same $.ajax options and syntax
+  r.get('/1.1/account/verify_credentials.json').done(function(data) {
+    // Hello, data.name !
+  });
+});
+ ```
+
+For more informations about API requests, you can see the [full documentation of this part](https://oauth.io/docs/requests)
 
 ### Run the included samples
 
@@ -72,4 +89,4 @@ Or you can allow all domains with `*`
 
 ### Troubleshoot
 
-Make sure you only include this plugin in your app, and not the web's JS file.
+Make sure you only include this plugin in your app, and not the [web's JS](https://github.com/oauth-io/oauth-js) file.

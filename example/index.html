@@ -10,30 +10,44 @@
     <body>
         <div class="app">
             <h1>OAuth.io PhoneGap example</h1>
-            <button id="connect">Connect to facebook</button>
+            <button id="fb-connect">Connect to facebook</button>
+            <button id="tw-connect">Connect to twitter</button>
             <p id="result"></p>
         </div>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
-        <script type="text/javascript">
-            function greetings(token) {
-                $.get("https://graph.facebook.com/me", {"access_token":token}, function(data) {
-                    $('#result').html("Hello, " + data.name + " !");
-                });
-            }
 
+        <script type="text/javascript">
             $(document).on('deviceready', function() {
                 OAuth.initialize("VeQmyEu0QtzIOO9WjM1IlAU0ty4");
 
-                $('#connect').on('click', function() {
-
+                $('#fb-connect').on('click', function() {
+                    $('#result').html("");
                     OAuth.popup("facebook", function(e,r) {
                         if (e)
                             $('#result').html('error: ' + e.message);
                         else
-                            greetings(r.access_token);
+                            // the access_token is available via r.access_token
+                            // but the http functions automagically wrap the jquery calls
+                            r.get('/me').done(function(data) {
+                                $('#result').html("facebook: Hello, " + data.name + " !");
+                            });
                     });
+                });
 
+                $('#tw-connect').on('click', function() {
+                    $('#result').html("");
+                    OAuth.popup("twitter", function(e,r) {
+                        if (e)
+                            $('#result').html('error: ' + e.message);
+                        else
+                            // the tokens are available via r.oauth_token / r.oauth_token_secret
+                            r.get('/1.1/account/verify_credentials.json').done(function(data) {
+                                $('#result').html("twitter: Hello, " + data.name + " !");
+                            }).fail(function( jqXHR, textStatus, errorThrown) {
+                                $('#result').html("req error: " + textStatus);
+                            });
+                    });
                 });
             });
         </script>
