@@ -78,7 +78,7 @@ module.exports = {
 	},
 	setOAuthdURL: function(url) {
 		config.oauthd_url = url;
-	}
+	},
 	popup: function(provider, opts, callback) {
 		var wnd;
 		if ( ! config.key)
