@@ -1,5 +1,6 @@
 var config = {
 	oauthd_url: 'https://oauth.io'
+	version: 'phonegap-0.1'
 };
 
 var client_states = [];
@@ -78,6 +79,9 @@ module.exports = {
 	},
 	setOAuthdURL: function(url) {
 		config.oauthd_url = url;
+	},
+	getVersion: function() {
+		return config.version;
 	},
 	popup: function(provider, opts, callback) {
 		var wnd;
