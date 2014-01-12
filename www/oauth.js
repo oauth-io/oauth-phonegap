@@ -1,5 +1,5 @@
 var config = {
-	oauthd_url: 'https://oauth.io'
+	oauthd_url: 'https://oauth.io',
 	version: 'phonegap-0.1'
 };
 
