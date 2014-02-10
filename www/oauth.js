@@ -84,7 +84,7 @@ module.exports = {
 		return config.version;
 	},
 	popup: function(provider, opts, callback) {
-		var wnd;
+		var wnd, wndTimeout;
 		if ( ! config.key)
 			return callback(new Error('OAuth object must be initialized'));
 		if (arguments.length === 2) {
@@ -99,10 +99,20 @@ module.exports = {
 		url += '&redirect_uri=http%3A%2F%2Flocalhost';
 		url += "&opts=" + encodeURIComponent(JSON.stringify(opts));
 
+		wndTimeout = setTimeout(function() {
+			try {
+				wnd.close();
+			} catch(e) {
+				return;
+			}
+			callback(new Error("Authorization timed out"));
+		}, 1200 * 1000)
+
 		wnd = window.open(url, '_blank', 'location=no,toolbar=no');
 		wnd.addEventListener('loadstart', function(ev) {
 			if (ev.url.substr(0,17) !== "http://localhost/")
 				return;
+			if (wndTimeout) clearTimeout(wndTimeout);
 			var results = /[\\#&]oauthio=([^&]*)/.exec(ev.url);
 			wnd.close();
 			if (results && results[1]) {
