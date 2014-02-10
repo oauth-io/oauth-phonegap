@@ -1,6 +1,6 @@
 var config = {
 	oauthd_url: 'https://oauth.io',
-	version: 'phonegap-0.1'
+	version: 'phonegap-0.1.1'
 };
 
 var client_states = [];
