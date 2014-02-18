@@ -124,6 +124,7 @@ module.exports = {
 			else
 				callback(new Error("unable to receive token"));
 		});
+		return wnd;
 	},
 	http: function(opts) {
 		var options = {};
