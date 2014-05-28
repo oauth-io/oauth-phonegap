@@ -72,7 +72,7 @@ module.exports = function(grunt) {
             all: ['tests/unit/spec/']
         },
 
-        taskDefault: ['coffee', 'browserify', 'uglify', 'bower']
+        taskDefault: ['coffee', 'browserify', 'uglify']
     };
 
     grunt.initConfig(gruntConf);
@@ -84,29 +84,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-jasmine-node');
-
-    grunt.registerTask('bower', 'Creates an updated bower.json', function() {
-        var done = this.async();
-        fs.readFile('./templates/bower.json', 'UTF-8', function(e, text) {
-            if (e) {
-                console.err('A problem occured while creating bower.json');
-                done();
-                return;
-            }
-            text = text.replace('{{sdk_version}}', package_info.version);
-            text = text.replace('{{description}}', package_info.description);
-            text = text.replace('{{license}}', package_info.license);
-            fs.writeFile('./bower.json', text, function(e) {
-                if (e) {
-                    console.err('A problem occured while creating bower.json');
-                    done();
-                    return;
-                }
-                console.log("Wrote bower.json file");
-                done();
-            });
-        });
-    });
 
     grunt.registerTask('coverage', 'Creates a tests coverage report', function() {
         var exec = require('child_process').exec;
