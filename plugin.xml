@@ -12,11 +12,7 @@
       &lt;p&gt;The OAuth.io plugin for Apache Cordova/PhoneGap allows you to use the same JavaScript code in your PhoneGap application as you use in your web application, to connect any OAuth provider available on OAuth.io.&lt;/p&gt;
     </description>
 
-    <asset src="www/oauth.js" target="oauth.js" />
-    <js-module src="www/oauth.js" name="OAuth">
-        <clobbers target="OAuth" />
-    </js-module>
-
+    <asset src="www/dist/oauth.js" target="oauth.js" />
     <config-file target="config.xml" parent="/*">
       <access origin="https://oauth.io" />
     </config-file>
