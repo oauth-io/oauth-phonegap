@@ -46,7 +46,7 @@ module.exports = function(grunt) {
                             'envify', {
                                 oauthd_url: 'https://oauth.io',
                                 api_url: 'https://oauth.io/api',
-                                sdk_version: "web-" + package_info.version
+                                sdk_version: "phonegap-" + package_info.version
                             }
                         ]
                     ]

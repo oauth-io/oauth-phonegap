@@ -79,7 +79,7 @@ module.exports = function(window, document, jQuery, navigator) {
     }
   };
   return function(exports) {
-    var delayedFunctions;
+    var delayedFunctions, delayfn, e, _preloadcalls;
     delayedFunctions = function($) {
       oauthio.request = require("./oauthio_requests")($, config, client_states, cache, providers_api);
       providers_api.fetchDescription = function(provider) {
@@ -258,7 +258,51 @@ module.exports = function(window, document, jQuery, navigator) {
           }
         }
       };
+      if (typeof window.jQuery === "undefined") {
+        _preloadcalls = [];
+        delayfn = void 0;
+        if (typeof chrome !== "undefined" && chrome.extension) {
+          delayfn = function() {
+            return function() {
+              throw new Error("Please include jQuery before oauth.js");
+            };
+          };
+        } else {
+          e = document.createElement("script");
+          e.src = "//code.jquery.com/jquery.min.js";
+          e.type = "text/javascript";
+          e.onload = function() {
+            var i;
+            delayedFunctions(window.jQuery);
+            for (i in _preloadcalls) {
+              _preloadcalls[i].fn.apply(null, _preloadcalls[i].args);
+            }
+          };
+          document.getElementsByTagName("head")[0].appendChild(e);
+          delayfn = function(f) {
+            return function() {
+              var arg, args_copy;
+              args_copy = [];
+              for (arg in arguments) {
+                args_copy[arg] = arguments[arg];
+              }
+              _preloadcalls.push({
+                fn: f,
+                args: args_copy
+              });
+            };
+          };
+        }
+        oauthio.request.http = delayfn(function() {
+          oauthio.request.http.apply(exports.OAuth, arguments);
+        });
+        providers_api.fetchDescription = delayfn(function() {
+          providers_api.fetchDescription.apply(providers_api, arguments);
+        });
+        oauthio.request = require("./oauthio_requests")(window.jQuery, config, client_states, cache, providers_api);
+      } else {
+        delayedFunctions(window.jQuery);
+      }
     }
-    delayedFunctions(window.jQuery);
   };
 };
