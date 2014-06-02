@@ -4,7 +4,14 @@ module.exports =
 		@cookies = cookies_module
 	tryCache: (OAuth, provider, cache) ->
 			if @cacheEnabled(cache)
-				cache = @cookies.readCookie("oauthio_provider_" + provider)
+				try
+					cache = JSON.parse(window.localStorage.getItem("oauthio_provider_" + provider))
+				catch e 
+					cache = false
+				if (cache and cache.date >= new Date().getTime())
+					cache = cache.value
+				else
+					cache = false
 				return false  unless cache
 				cache = decodeURIComponent(cache)
 			if typeof cache is "string"
@@ -17,9 +24,11 @@ module.exports =
   					res[i] = cache[i]  if i isnt "request" and typeof cache[i] isnt "function"
 				return OAuth.create(provider, res, cache.request)
 			false
-
+	clearCache: (provider) ->
+		window.localStorage.removeItem("oauthio_provider_" + provider)
 	storeCache: (provider, cache) ->
-		@cookies.createCookie "oauthio_provider_" + provider, encodeURIComponent(JSON.stringify(cache)), cache.expires_in - 10 or 3600
+		expires_in = cache.expires_in * 1000 - 10000 or 36000000
+		window.localStorage.setItem "oauthio_provider_" + provider, JSON.stringify({ value: encodeURIComponent(JSON.stringify(cache)), date: new Date().getTime() + expires_in })
 		return
 
 	cacheEnabled: (cache) ->

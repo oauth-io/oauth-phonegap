@@ -134,7 +134,7 @@ module.exports = function(window, document, jQuery, navigator) {
             return oauthio.request.mkHttp(provider, tokens, request, method);
           };
           make_res_endpoint = function(method, url) {
-            return oauthio.request.mkHttpEndpoint(data.provider, tokens, request, method, url);
+            return oauthio.request.mkHttpEndpoint(provider, tokens, request, method, url);
           };
           res = {};
           for (i in tokens) {
@@ -145,9 +145,7 @@ module.exports = function(window, document, jQuery, navigator) {
           res.put = make_res("PUT");
           res.patch = make_res("PATCH");
           res.del = make_res("DELETE");
-          res.me = function(opts) {
-            oauthio.request.mkHttpMe(data.provider, tokens, request, "GET");
-          };
+          res.me = oauthio.request.mkHttpMe(provider, tokens, request, "GET");
           return res;
         },
         popup: function(provider, opts, callback) {
@@ -245,7 +243,7 @@ module.exports = function(window, document, jQuery, navigator) {
           return defer != null ? defer.promise() : void 0;
         },
         clearCache: function(provider) {
-          cookies.eraseCookie("oauthio_provider_" + provider);
+          cache.clearCache(provider);
         },
         http_me: function(opts) {
           if (oauthio.request.http_me) {
