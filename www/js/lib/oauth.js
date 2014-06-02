@@ -188,7 +188,7 @@ module.exports = function(window, document, jQuery, navigator) {
               if (callback) {
                 return callback(null, res);
               } else {
-                return;
+                return defer.promise();
               }
             }
           }
