@@ -3,10 +3,15 @@ OAuth.io Cordova/Phonegap SDK
 
 This is the Cordova/Phonegap SDK for [OAuth.io](https://oauth.io). OAuth.io allows you to integrate **100+ providers** really easily in your web app, without worrying about each provider's OAuth specific implementation.
 
-* Supported on PhoneGap (Cordova) v3.0.0 and above.
-
 Installation
 ============
+
+* This plugin is supported on PhoneGap (Cordova) v3.0.0 and above.
+
+OAuth.io Requirements and Set-Up
+--------------------------------
+
+To use this plugin you will need to make sure you've registered your OAuth.io app and have a public key (please check https://oauth.io/docs).
 
 Getting the SDK
 ---------------
@@ -287,6 +292,9 @@ You are welcome to fork and make pull requests. We will be happy to review them 
 Testing the SDK
 ===============
 
+Unit Testing
+------------
+
 To test the SDK, you first need to install the npm modules `jasmine-node` and `istanbul` (to get the tests coverage) :
 
 ```sh
@@ -306,6 +314,31 @@ $ npm test
 ```
 
 The coverage report is generated in the `coverage` folder. You can have a nice HTML render of the report in `coverage/lcof-report/index.html`
+
+Running the included samples
+------------------------
+
+1. Create a new project as described in the [PhoneGap documentation](http://docs.phonegap.com/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface). By example:
+
+```sh
+$ phonegap create oauthio-test com.example.oauthio-test OAuthioTest
+$ cd oauthio-test
+$ phonegap install android
+```
+
+2. Install OAuth.io plugin into the project
+
+```sh
+$ phonegap local plugin add https://github.com/oauth-io/oauth-phonegap
+```
+
+3. Replace the generated example `index.html` with the one included in the example folder, and copy jquery. A valid key is provided, but you can do your own app on [OAuth.io](https://oauth.io/). Also, please check that your `config.xml` file contains `<access origin="*" />` or accept oauth.io and the provider's domain (e.g. graph.facebook.com).
+
+4. Plug your phone & run it ! (or add --emulate)
+5. 
+```sh
+$ phonegap run android
+```
 
 License
 =======
