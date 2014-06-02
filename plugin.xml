@@ -13,6 +13,11 @@
     </description>
 
     <asset src="www/dist/oauth.js" target="oauth.js" />
+  
+    <js-module src="www/dist/oauth.js" name="OAuth">
+        <merges target="OAuth" />
+    </js-module>
+
     <config-file target="config.xml" parent="/*">
       <access origin="https://oauth.io" />
     </config-file>
