@@ -54,11 +54,7 @@ Or you can allow all domains with `*` like this :
 Integrating in your project
 ---------------------------
 
-In the `<head>` of your index.html file (the root of your Cordova/Phonegap app), include OAuth.js
-
-`<script src="oauth.js"></script>`
-
-The `oauth.js` file is automatically copied to your www directory by Phonegap when you run the app.
+The `OAuth` object is automatically added to `window` when you include the plugin, so you don't need 
 
 In your JavaScript, add this line to initialize OAuth.js. You can get a public key from your [OAuth.io Key Manager](https://oauth.io/key-manager) (you'll have to create an account if you don't have one yet).
 
@@ -318,7 +314,7 @@ The coverage report is generated in the `coverage` folder. You can have a nice H
 Running the included samples
 ------------------------
 
-1. Create a new project as described in the [PhoneGap documentation](http://docs.phonegap.com/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface). By example:
+**Create a new project as described in the [PhoneGap documentation](http://docs.phonegap.com/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface). For example:**
 
 ```sh
 $ phonegap create oauthio-test com.example.oauthio-test OAuthioTest
@@ -326,16 +322,18 @@ $ cd oauthio-test
 $ phonegap install android
 ```
 
-2. Install OAuth.io plugin into the project
+**Install OAuth.io plugin into the project**
 
 ```sh
 $ phonegap local plugin add https://github.com/oauth-io/oauth-phonegap
 ```
 
-3. Replace the generated example `index.html` with the one included in the example folder, and copy jquery. A valid key is provided, but you can do your own app on [OAuth.io](https://oauth.io/). Also, please check that your `config.xml` file contains `<access origin="*" />` or accept oauth.io and the provider's domain (e.g. graph.facebook.com).
+**Replace the generated example `index.html` with the one included in the example folder, and copy jquery.**
 
-4. Plug your phone & run it ! (or add --emulate)
-5. 
+A valid key is provided, but you can do your own app on [OAuth.io](https://oauth.io/). Also, please check that your `config.xml` file contains `<access origin="*" />` or accept oauth.io and the provider's domain (e.g. graph.facebook.com).
+
+**Plug your phone & run it ! (or add --emulate)**
+
 ```sh
 $ phonegap run android
 ```
