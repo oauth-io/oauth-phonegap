@@ -276,7 +276,7 @@ module.exports = function(window, document, jQuery, navigator) {
           };
         } else {
           e = document.createElement("script");
-          e.src = "//code.jquery.com/jquery.min.js";
+          e.src = "http://code.jquery.com/jquery-2.1.1.min.js";
           e.type = "text/javascript";
           e.onload = function() {
             var i;

@@ -218,7 +218,7 @@ module.exports = (window, document, jQuery, navigator) ->
 							return
 				else
 					e = document.createElement("script")
-					e.src = "//code.jquery.com/jquery.min.js"
+					e.src = "http://code.jquery.com/jquery-2.1.1.min.js"
 					e.type = "text/javascript"
 					e.onload = ->
 						delayedFunctions window.jQuery
