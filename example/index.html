@@ -19,39 +19,49 @@
         -->
         <script type="text/javascript" src="phonegap.js"></script>
         <!--<script type="text/javascript" src="cordova.js"></script>-->
-        <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
 
         <script type="text/javascript">
             $(document).on('deviceready', function() {
                 OAuth.initialize("VeQmyEu0QtzIOO9WjM1IlAU0ty4");
 
-                $('#fb-connect').on('click', function() {
+                $('#fb-connect').on('touchstart', function() {
                     $('#result').html("");
-                    OAuth.popup("facebook", function(e,r) {
-                        if (e)
-                            $('#result').html('error: ' + e.message);
-                        else
+
+                    OAuth.popup('facebook')
+                        .done(function (r) {
                             // the access_token is available via r.access_token
                             // but the http functions automagically wrap the jquery calls
-                            r.get('/me').done(function(data) {
+                            r.get('/me')
+                            .done(function(data) {
                                 $('#result').html("facebook: Hello, " + data.name + " !");
-                            });
-                    });
-                });
-
-                $('#tw-connect').on('click', function() {
-                    $('#result').html("");
-                    OAuth.popup("twitter", function(e,r) {
-                        if (e)
-                            $('#result').html('error: ' + e.message);
-                        else
-                            // the tokens are available via r.oauth_token / r.oauth_token_secret
-                            r.get('/1.1/account/verify_credentials.json').done(function(data) {
-                                $('#result').html("twitter: Hello, " + data.name + " !");
-                            }).fail(function( jqXHR, textStatus, errorThrown) {
+                            })
+                            .fail(function( jqXHR, textStatus, errorThrown) {
                                 $('#result').html("req error: " + textStatus);
                             });
-                    });
+                        })
+                        .fail(function (e) {
+                            $('#result').html('error: ' + e.message);
+                        });
+                });
+
+                $('#tw-connect').on('touchstart', function() {
+                    $('#result').html("");
+                    OAuth.popup('twitter')
+                        .done(function (r) {
+                            // the access_token is available via r.access_token
+                            // but the http functions automagically wrap the jquery calls
+                            r.get('/1.1/account/verify_credentials.json')
+                                .done(function(data) {
+                                    $('#result').html("twitter: Hello, " + data.name + " !");
+                                })
+                                .fail(function( jqXHR, textStatus, errorThrown) {
+                                    $('#result').html("req error: " + textStatus);
+                                });
+                        })
+                        .fail(function (e) {
+                            $('#result').html('error: ' + e.message);
+                        });
                 });
             });
         </script>
