@@ -169,7 +169,7 @@ To make a PUT request, you have to call the `result.post` method like this :
 //containing the new name
 OAuth.popup(provider)
 .done(function(result) {
-    result.put('/message', {
+    result.put('/profile', {
         data: {
             name: "John Williams Doe III"
         }
@@ -198,7 +198,7 @@ To make a PATCH request, you have to call the `result.patch` method like this :
 //containing the new name
 OAuth.popup(provider)
 .done(function(result) {
-    result.patch('/message', {
+    result.patch('/profile', {
         data: {
             name: "John Williams Doe III"
         }
@@ -283,7 +283,22 @@ result.me(['firstname', 'lastname', 'email'/*, ...*/])
 Contributing
 ============
 
-You are welcome to fork and make pull requests. We will be happy to review them and include them in the code if they bring nice improvements :)
+**Issues**
+
+Feel free to post issues if you have problems while using this SDK.
+
+**Pull requests**
+
+You are welcome to fork and make pull requests. We appreciate the time you spend working on this project and we will be happy to review your code and merge it if it brings nice improvements :)
+
+If you want to do a pull request, please mind these simple rules :
+
+- *One feature per pull request*
+- *Write lear commit messages*
+- *Unit test your feature* : if it's a bug fix for example, write a test that proves the bug exists and that your fix resolves it.
+- *Write a clear description of the pull request*
+
+If you do so, we'll be able to merge your pull request more quickly :)
 
 Testing the SDK
 ===============
