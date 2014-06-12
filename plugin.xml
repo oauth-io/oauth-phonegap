@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.phonegap.plugins.oauthio"
-    version="0.1.1">
+    version="0.2.1">
 
     <name>OAuth.io</name>
 
@@ -18,9 +18,29 @@
         <merges target="OAuth" />
     </js-module>
 
-    <config-file target="config.xml" parent="/*">
-      <access origin="https://oauth.io" />
-    </config-file>
+    <platform name="android">        
+        <config-file target="res/xml/config.xml" parent="/*">
+          <access origin="https://oauth.io" />
+        </config-file>
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+          <access origin="https://oauth.io" />
+        </config-file>
+    </platform>
+
+    <platform name="wp7">
+      <config-file target="config.xml" parent="/*">
+          <access origin="https://oauth.io" />
+      </config-file>
+    </platform>
+
+    <platform name="wp8">
+      <config-file target="config.xml" parent="/*">
+          <access origin="https://oauth.io" />
+      </config-file>  
+    </platform>
 
     <engines>
       <engine name="cordova" version=">=3.0.0" />
