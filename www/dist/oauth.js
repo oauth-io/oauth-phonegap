@@ -2,7 +2,7 @@
 module.exports = {
   oauthd_url: "https://oauth.io",
   oauthd_api: "https://oauth.io/api",
-  version: "phonegap-0.2.0",
+  version: "phonegap-0.2.1",
   options: {}
 };
 
