@@ -54,7 +54,7 @@ Or you can allow all domains with `*` like this :
 Integrating in your project
 ---------------------------
 
-The `OAuth` object is automatically added to `window` when you include the plugin, so you don't need to add it youself.
+The `OAuth` object is automatically added to `window` when you include the plugin, so you don't need to add it yourself.
 
 In your JavaScript, add this line to initialize OAuth.js. You can get the public key of your app from your [OAuth.io dashboard](https://oauth.io/dashboard/apps).
 
