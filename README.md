@@ -54,9 +54,9 @@ Or you can allow all domains with `*` like this :
 Integrating in your project
 ---------------------------
 
-The `OAuth` object is automatically added to `window` when you include the plugin, so you don't need 
+The `OAuth` object is automatically added to `window` when you include the plugin, so you don't need to add it yourself.
 
-In your JavaScript, add this line to initialize OAuth.js. You can get a public key from your [OAuth.io Key Manager](https://oauth.io/key-manager) (you'll have to create an account if you don't have one yet).
+In your JavaScript, add this line to initialize OAuth.js. You can get the public key of your app from your [OAuth.io dashboard](https://oauth.io/dashboard/apps).
 
 ```javascript
 OAuth.initialize('your_app_public_key');
@@ -318,7 +318,7 @@ Then you can run the testsuite from the SDK www directory :
 $ jasmine-node --verbose tests/unit/spec
 ```
 
-Once you've isntalled `istanbul`, you can run the following command to get coverage information :
+Once you've installed `istanbul`, you can run the following command to get coverage information :
 
 ```sh
 $ npm test
