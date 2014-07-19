@@ -25,7 +25,7 @@ module.exports = (window, document, jQuery, navigator) ->
 					cbs[i] e, r
 			return
 
-		
+
 		# "fetchDescription": function(provider) is created once jquery loaded
 		getDescription: (provider, opts, callback) ->
 			opts = opts or {}
@@ -63,7 +63,7 @@ module.exports = (window, document, jQuery, navigator) ->
 	}
 
 	return (exports) ->
-		
+
 		# create popup
 		delayedFunctions = ($) ->
 			oauthio.request = require("./oauthio_requests")($, config, client_states, cache, providers_api)
@@ -164,21 +164,21 @@ module.exports = (window, document, jQuery, navigator) ->
 					url = config.oauthd_url + "/auth/" + provider + "?k=" + config.key
 					url += '&redirect_uri=http%3A%2F%2Flocalhost'
 					url += "&opts=" + encodeURIComponent(JSON.stringify(opts))  if opts
-					
+
 					opts.provider = provider
 					opts.cache = opts.cache
 
 					wndTimeout = setTimeout(->
 						defer?.reject new Error("Authorization timed out")
 						if opts.callback and typeof opts.callback == "function"
-							opts.callback new Error("Authorization timed out")  
+							opts.callback new Error("Authorization timed out")
 						try
 							wnd.close()
 						return
 					, 1200 * 1000)
 
 					wnd = window.open(url, "_blank", 'location=no,toolbar=no')
-					
+
 					wnd.addEventListener "loadstart", (ev) ->
 						return  if ev.url.substr(0, 17) isnt "http://localhost/"
 						clearTimeout wndTimeout  if wndTimeout
