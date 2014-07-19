@@ -4,9 +4,7 @@ cookies = require("../tools/cookies")
 cache = require("../tools/cache")
 Url = require("../tools/url")
 sha1 = require("../tools/sha1")
-module.exports = (window, document, jQuery, navigator) ->
-	$ = jQuery
-
+module.exports = (window, document, $, navigator) ->
 	# datastore = datastore(config, document)
 	Url = Url(document)
 	cookies.init config, document
@@ -138,7 +136,7 @@ module.exports = (window, document, jQuery, navigator) ->
 					wnd = undefined
 					frm = undefined
 					wndTimeout = undefined
-					defer = window.jQuery?.Deferred()
+					defer = $?.Deferred()
 					opts = opts or {}
 					unless config.key
 						defer?.reject new Error("OAuth object must be initialized")
@@ -208,7 +206,7 @@ module.exports = (window, document, jQuery, navigator) ->
 					oauthio.request.http opts  if oauthio.request.http
 					return
 
-			if typeof window.jQuery is "undefined"
+			if typeof $ is "undefined"
 				_preloadcalls = []
 				delayfn = undefined
 				if typeof chrome isnt "undefined" and chrome.extension
@@ -247,6 +245,6 @@ module.exports = (window, document, jQuery, navigator) ->
 				)
 				oauthio.request = require("./oauthio_requests")(window.jQuery, config, client_states, cache, providers_api)
 			else
-				delayedFunctions window.jQuery
+				delayedFunctions $
 		return
 

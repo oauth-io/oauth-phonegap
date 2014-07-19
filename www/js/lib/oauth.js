@@ -11,9 +11,8 @@ Url = require("../tools/url");
 
 sha1 = require("../tools/sha1");
 
-module.exports = function(window, document, jQuery, navigator) {
-  var $, client_states, oauth_result, oauthio, parse_urlfragment, providers_api, providers_cb, providers_desc;
-  $ = jQuery;
+module.exports = function(window, document, $, navigator) {
+  var client_states, oauth_result, oauthio, parse_urlfragment, providers_api, providers_cb, providers_desc;
   Url = Url(document);
   cookies.init(config, document);
   cache.init(cookies, config);
@@ -149,7 +148,7 @@ module.exports = function(window, document, jQuery, navigator) {
           return res;
         },
         popup: function(provider, opts, callback) {
-          var defer, frm, getMessage, res, url, wnd, wndTimeout, _ref;
+          var defer, frm, getMessage, res, url, wnd, wndTimeout;
           getMessage = function(e) {
             if (e.origin !== config.oauthd_base) {
               return;
@@ -163,7 +162,7 @@ module.exports = function(window, document, jQuery, navigator) {
           wnd = void 0;
           frm = void 0;
           wndTimeout = void 0;
-          defer = (_ref = window.jQuery) != null ? _ref.Deferred() : void 0;
+          defer = $ != null ? $.Deferred() : void 0;
           opts = opts || {};
           if (!config.key) {
             if (defer != null) {
@@ -256,7 +255,7 @@ module.exports = function(window, document, jQuery, navigator) {
           }
         }
       };
-      if (typeof window.jQuery === "undefined") {
+      if (typeof $ === "undefined") {
         _preloadcalls = [];
         delayfn = void 0;
         if (typeof chrome !== "undefined" && chrome.extension) {
@@ -299,7 +298,7 @@ module.exports = function(window, document, jQuery, navigator) {
         });
         oauthio.request = require("./oauthio_requests")(window.jQuery, config, client_states, cache, providers_api);
       } else {
-        delayedFunctions(window.jQuery);
+        delayedFunctions($);
       }
     }
   };
