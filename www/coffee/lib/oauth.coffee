@@ -177,7 +177,7 @@ module.exports = (window, document, jQuery, navigator) ->
 						return
 					, 1200 * 1000)
 
-					wnd = window.open(url, "_blank", 'location=no')
+					wnd = window.open(url, "_blank", 'location=no,clearsessioncache=yes,clearcache=yes')
 					
 					wnd.addEventListener "loadstart", (ev) ->
 						return  if ev.url.substr(0, 17) isnt "http://localhost/"

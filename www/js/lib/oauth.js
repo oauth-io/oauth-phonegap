@@ -215,7 +215,7 @@ module.exports = function(window, document, jQuery, navigator) {
               wnd.close();
             } catch (_error) {}
           }, 1200 * 1000);
-          wnd = window.open(url, "_blank", 'location=no,toolbar=no');
+          wnd = window.open(url, "_blank", 'location=no,clearsessioncache=yes,clearcache=yes');
           wnd.addEventListener("loadstart", function(ev) {
             var results;
             if (ev.url.substr(0, 17) !== "http://localhost/") {
