@@ -249,6 +249,14 @@ module.exports = function(window, document, jQuery, navigator) {
               }
             }
           });
+          wnd.addEventListener("exit", function() {
+            if (defer != null) {
+              defer.reject(new Error("The popup was closed"));
+            }
+            if (opts.callback && typeof opts.callback === "function") {
+              return opts.callback(new Error("The popup was closed"));
+            }
+          });
           return defer != null ? defer.promise() : void 0;
         },
         clearCache: function(provider) {
