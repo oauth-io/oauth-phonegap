@@ -2,7 +2,7 @@
 module.exports = {
   oauthd_url: "https://oauth.io",
   oauthd_api: "https://oauth.io/api",
-  version: "phonegap-0.2.3",
+  version: "phonegap-0.2.4",
   options: {}
 };
 
@@ -320,7 +320,7 @@ var Url,
 
 Url = require('../tools/url')();
 
-module.exports = function($, config, client_states, cache) {
+module.exports = function($, config, client_states, cache, providers_api) {
   return {
     http: function(opts) {
       var defer, desc_opts, doRequest, i, options;
@@ -685,15 +685,42 @@ module.exports = {
     return false;
   },
   clearCache: function(provider) {
-    return window.localStorage.removeItem("oauthio_provider_" + provider);
+    var cached_providers, e, k;
+    if ((provider != null)) {
+      return window.localStorage.removeItem("oauthio_provider_" + provider);
+    } else {
+      try {
+        cached_providers = JSON.parse(window.localStorage.getItem("oauthio_cached_providers"));
+      } catch (_error) {
+        e = _error;
+        cached_providers = {};
+      }
+      cached_providers = cached_providers || {};
+      for (k in cached_providers) {
+        if (cached_providers[k]) {
+          cached_providers[k] = false;
+          window.localStorage.removeItem("oauthio_provider_" + k);
+        }
+      }
+      return window.localStorage.setItem("oauthio_cached_providers", JSON.stringify(cached_providers));
+    }
   },
   storeCache: function(provider, cache) {
-    var expires_in;
+    var cached_providers, e, expires_in;
     expires_in = cache.expires_in * 1000 - 10000 || 36000000;
     window.localStorage.setItem("oauthio_provider_" + provider, JSON.stringify({
       value: encodeURIComponent(JSON.stringify(cache)),
       date: new Date().getTime() + expires_in
     }));
+    try {
+      cached_providers = JSON.parse(window.localStorage.getItem("oauthio_cached_providers"));
+    } catch (_error) {
+      e = _error;
+      cached_providers = {};
+    }
+    cached_providers = cached_providers || {};
+    cached_providers[provider] = true;
+    window.localStorage.setItem("oauthio_cached_providers", JSON.stringify(cached_providers));
   },
   cacheEnabled: function(cache) {
     if (typeof cache === "undefined") {
