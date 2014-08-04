@@ -109,10 +109,9 @@ module.exports = (window, document, jQuery, navigator) ->
 
 				create: (provider, tokens, request) ->
 					return cache.tryCache(exports.OAuth, provider, true)  unless tokens
-					providers_api.fetchDescription provider  if typeof request isnt "object"
+					providers_api.fetchDescription provider if typeof request isnt "object"
 					make_res = (method) ->
 						oauthio.request.mkHttp provider, tokens, request, method
-
 					make_res_endpoint = (method, url) ->
 						oauthio.request.mkHttpEndpoint provider, tokens, request, method, url
 
