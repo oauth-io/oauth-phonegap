@@ -5,6 +5,7 @@
     version="0.2.4">
 
     <name>OAuth.io</name>
+    <license>Apache 2.0</license>
 
     <description>
       &lt;p&gt;This is the official plugin for OAuth.io in Apache Cordova/PhoneGap!&lt;/p&gt;
