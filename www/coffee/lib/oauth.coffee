@@ -193,6 +193,9 @@ module.exports = (window, document, jQuery, navigator) ->
 								opts.callback new Error("unable to receive token")
 							defer?.reject new Error("unable to receive token")
 						return
+					wnd.addEventListener "exit", () ->
+						defer?.reject new Error("The popup was closed")
+						opts.callback new Error("The popup was closed")  if opts.callback and typeof opts.callback == "function"
 
 					return defer?.promise()
 				clearCache: (provider) ->
