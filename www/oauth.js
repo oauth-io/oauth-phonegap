@@ -57,6 +57,7 @@ function sendCallback(opts) {
 
 	var res = data.data;
 	var request = res.request;
+	res.__request = request;
 	delete res.request;
 	var tokens;
 	if (res.access_token)
